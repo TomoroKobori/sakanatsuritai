@@ -1,17 +1,17 @@
 version: '3'
 services:
   mysql:
-   image: mysql:5.7
-   env_file: ./mysql/mysql.env
-   environment:
-     - TZ=Asia/Tokyo
-   ports:
-     - '3306:3306'
-   volumes:
-     - ./mysql/conf:/etc/mysql/conf.d/:ro
-     - mysqldata:/var/lib/mysql
-   networks:
-     - default
+    image: mysql:5.7
+    env_file: ./mysql/mysql.env
+    environment:
+      - TZ=Asia/Tokyo
+    ports:
+      - '13306:3306'
+    volumes:
+      - ./mysql/conf:/etc/mysql/conf.d/:ro
+      - mysqldata:/var/lib/mysql
+    networks:
+      - default
   app:
     build:
       context: ./docker      # Dockerfile保存場所
