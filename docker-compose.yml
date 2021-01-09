@@ -20,8 +20,8 @@ services:
     environment:
       - TZ=Asia/Tokyo
       - DEBUG=app:*
-    image: node-app                  # イメージ名
-    container_name: node-app         # コンテナ名
+    image: node_app_sakanatsuritai               # イメージ名
+    container_name: node_app_sakanatsuritai       # コンテナ名
     ports:                          # ポート接続
       - 3000:3000
     volumes:                        # mount workdir
