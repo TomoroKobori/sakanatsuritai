@@ -1,0 +1,38 @@
+version: '3'
+services:
+  mysql:
+   image: mysql:5.7
+   env_file: ./mysql/mysql.env
+   environment:
+     - TZ=Asia/Tokyo
+   ports:
+     - '3306:3306'
+   volumes:
+     - ./mysql/conf:/etc/mysql/conf.d/:ro
+     - mysqldata:/var/lib/mysql
+   networks:
+     - default
+  app:
+    build:
+      context: ./docker      # Dockerfile保存場所
+      dockerfile: Dockerfile    # Dockerfileファイル名
+    env_file: ./app.env
+    environment:
+      - TZ=Asia/Tokyo
+      - DEBUG=app:*
+    image: node-app                  # イメージ名
+    container_name: node-app         # コンテナ名
+    ports:                          # ポート接続
+      - 3000:3000
+    volumes:                        # mount workdir
+      - ./myapp:/src
+    command: [sh, -c, npm install && npm install nodemon && npm run watch]
+    networks:
+      - default
+    depends_on:
+      - mysql
+networks:
+  default:
+# コンテナが削除されてもデータが消えずに保持される
+volumes:
+  mysqldata:
