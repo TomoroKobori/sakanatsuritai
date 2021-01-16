@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
+const sassMiddleware = require('node-sass-middleware');
 
 const indexRouter = require('./routes/index');
 
@@ -13,6 +14,13 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
+
+app.use(sassMiddleware({
+  src: path.join(__dirname, 'public'),
+  dest: path.join(__dirname, 'public'),
+  indentedSyntax: false,
+  sourceMap: true
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
