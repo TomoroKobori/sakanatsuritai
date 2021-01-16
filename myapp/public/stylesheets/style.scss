@@ -1,6 +1,12 @@
+@import "node_modules/bulma/bulma.sass";
+
 body {
-  padding: 50px;
+  padding: 100000px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+p {
+  color: red;
 }
 
 a {
