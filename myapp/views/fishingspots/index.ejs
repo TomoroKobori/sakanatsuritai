@@ -1,0 +1,17 @@
+<h1>釣り場一覧だよ</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% fishingspots.forEach(fishingspot => { %>
+      <tr>
+        <td><%= fishingspot.id %></td>
+        <td><%= fishingspot.name %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
