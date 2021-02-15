@@ -4,6 +4,7 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
+      <th>アクション</th>
     </tr>
   </thead>
   <tbody>
@@ -11,6 +12,11 @@
       <tr>
         <td><%= fishingspot.id %></td>
         <td><%= fishingspot.name %></td>
+        <td>
+          <a href=<%= `/fishingspots/${fishingspot.id}/edit` %>>
+            編集
+          </a>
+        </td>
       </tr>
     <% }) %>
   </tbody>

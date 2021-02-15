@@ -23,4 +23,24 @@ router.post('/', function (req, res, next) {
   });
 });
 
+router.get('/:id/edit', function (req, res, next) {
+  models.FishingSpot.findByPk(req.params.id, {
+  }).then(fishingspot => {
+    res.render('fishingspots/edit', {
+      fishingspot: fishingspot
+    });
+  });
+});
+
+router.put('/:id', function (req, res, next) {
+  models.FishingSpot.findByPk(req.params.id, {
+  }).then(fishingspot => {
+    fishingspot.update({
+      name: req.body.name
+    })
+  }).then(fishingspot => {
+    res.redirect('/fishingspots');
+  });
+});
+
 module.exports = router;

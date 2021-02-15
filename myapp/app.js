@@ -6,10 +6,13 @@ const logger = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
 const sassMiddleware = require('node-sass-middleware');
 
+const methodOverride = require("method-override");
 const indexRouter = require('./routes/index');
 const fishingspotsRouter = require('./routes/fishingspots')
 
 const app = express();
+
+app.use(methodOverride("_method"));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
