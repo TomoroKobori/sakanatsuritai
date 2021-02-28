@@ -9,6 +9,7 @@ services:
       - MYSQL_USER=sakanatsuritai_dev_user
       - MYSQL_PASSWORD=sakanatsuritai_develop
       - MYSQL_DATABASE=sakanatsuritai_develop
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
     ports:
       - '3306:3306'
     volumes:
