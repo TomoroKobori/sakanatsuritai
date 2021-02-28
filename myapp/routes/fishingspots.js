@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const models = require("../models");
 
+// index
 router.get('/', function (req, res, next) {
   models.FishingSpot.findAll({
   }).then(fishingspots => {
@@ -11,10 +12,12 @@ router.get('/', function (req, res, next) {
   });
 });
 
+// new
 router.get('/new', function(req, res, next) {
   res.render('fishingspots/new');
 });
 
+// create
 router.post('/', function (req, res, next) {
   models.FishingSpot.create({
     name: req.body.name
@@ -23,6 +26,7 @@ router.post('/', function (req, res, next) {
   });
 });
 
+// edit
 router.get('/:id/edit', function (req, res, next) {
   models.FishingSpot.findByPk(req.params.id, {
   }).then(fishingspot => {
@@ -32,12 +36,23 @@ router.get('/:id/edit', function (req, res, next) {
   });
 });
 
+// update
 router.put('/:id', function (req, res, next) {
   models.FishingSpot.findByPk(req.params.id, {
   }).then(fishingspot => {
     fishingspot.update({
       name: req.body.name
     })
+  }).then(fishingspot => {
+    res.redirect('/fishingspots');
+  });
+});
+
+// destroy
+router.delete('/:id', function (req, res, next) {
+  models.FishingSpot.findByPk(req.params.id, {
+  }).then(fishingspot => {
+    fishingspot.destroy();
   }).then(fishingspot => {
     res.redirect('/fishingspots');
   });
