@@ -1,0 +1,27 @@
+<h1>魚の一覧だよ</h1>
+<a href=<%= `/fishes/new` %> class='button is-danger'>作成</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>アクション</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% fishes.forEach(fish => { %>
+      <tr>
+        <td><%= fish.id %></td>
+        <td><%= fish.name %></td>
+        <td>
+          <a href=<%= `/fishes/${fish.id}/edit` %> class='button'>
+            編集
+          </a>
+          <form action=<%= `/fishes/${fish.id}?_method=DELETE` %> method="post">
+            <button type="submit" class="button">削除</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

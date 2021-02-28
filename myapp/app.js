@@ -9,6 +9,7 @@ const sassMiddleware = require('node-sass-middleware');
 const methodOverride = require("method-override");
 const indexRouter = require('./routes/index');
 const fishingspotsRouter = require('./routes/fishingspots')
+const fishesRouter = require('./routes/fishes')
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/fishingspots', fishingspotsRouter);
+app.use('/fishes', fishesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
