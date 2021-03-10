@@ -8,7 +8,7 @@ const expressLayouts = require('express-ejs-layouts');
 const sassMiddleware = require('node-sass-middleware');
 
 const methodOverride = require("method-override");
-const indexRouter = require('../routes/index');
+const indexRouter = require('./routes/index');
 // const fishingspotsRouter = require('../routes/fishingspots')
 // const fishesRouter = require('../routes/fishes')
 
