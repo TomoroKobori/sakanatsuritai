@@ -39,19 +39,20 @@ app.use('/', indexRouter);
 // app.use('/fishes', fishesRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next): void => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err: any, req: any, res: any, next: any) {
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction): void => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  console.log('えらー')
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  res.status(500);
+  res.render('views/error');
 });
 
 module.exports = app;

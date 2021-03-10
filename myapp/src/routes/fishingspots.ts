@@ -1,31 +1,23 @@
 // const express = require('express');
 import express from "express";
 const router = express.Router();
-const models = require("../models");
 
 // index
-// router.get('/', function (req, res, next) {
-//   models.FishingSpot.findAll({
-//   }).then(fishingspots => {
-//     res.render('fishingspots/index', {
-//       fishingspots: fishingspots
-//     });
-//   });
-// });
+router.get('/', function (req, res, next) {
+  res.render('fishingspots/index', {
+    fishingspots: []
+  });
+});
 
 // new
-// router.get('/new', function(req, res, next) {
-//   res.render('fishingspots/new');
-// });
+router.get('/new', function(req, res, next) {
+  res.render('fishingspots/new');
+});
 
 // create
-// router.post('/', function (req, res, next) {
-//   models.FishingSpot.create({
-//     name: req.body.name
-//   }).then(fishingspot => {
-//     res.redirect('/fishingspots');
-//   });
-// });
+router.post('/', function (req, res, next) {
+  res.redirect('/fishingspots');
+});
 
 // edit
 // router.get('/:id/edit', function (req, res, next) {
@@ -37,7 +29,7 @@ const models = require("../models");
 //   });
 // });
 
-// update
+// // update
 // router.put('/:id', function (req, res, next) {
 //   models.FishingSpot.findByPk(req.params.id, {
 //   }).then(fishingspot => {

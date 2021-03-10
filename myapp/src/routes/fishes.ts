@@ -1,31 +1,23 @@
 // const express = require('express');
 import express from "express";
 const router = express.Router();
-const models = require("../models");
 
 // index
-// router.get('/', function (req, res, next) {
-//   models.Fish.findAll({
-//   }).then(fishes => {
-//     res.render('fishes/index', {
-//       fishes: fishes
-//     });
-//   });
-// });
+router.get('/', function (req, res, next) {
+  res.render('fishes/index', {
+    fishes: []
+  });
+});
 
 // new
-// router.get('/new', function(req, res, next) {
-//   res.render('fishes/new');
-// });
+router.get('/new', function(req, res, next) {
+  res.render('fishes/new');
+});
 
 // create
-// router.post('/', function (req, res, next) {
-//   models.Fish.create({
-//     name: req.body.name
-//   }).then(fish => {
-//     res.redirect('/fishes');
-//   });
-// });
+router.post('/', function (req, res, next) {
+  res.redirect('/fishes');
+});
 
 // edit
 // router.get('/:id/edit', function (req, res, next) {
