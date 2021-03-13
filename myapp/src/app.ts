@@ -49,7 +49,6 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  console.log('えらー')
   // render the error page
   res.status(500);
   res.render('views/error');
