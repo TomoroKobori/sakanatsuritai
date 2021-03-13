@@ -8,6 +8,7 @@
     "ts-node": "npx ts-node"
   },
   "dependencies": {
+    "@prisma/client": "^2.18.0",
     "bulma": "^0.9.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
