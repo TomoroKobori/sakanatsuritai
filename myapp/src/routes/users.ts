@@ -15,7 +15,6 @@ router.get('/', async (req: Request, res: Response, next: NextFunction): Promise
 
 // new
 router.get('/new', (req: Request, res: Response, next: NextFunction): void => {
-  console.log('いいいいいい')
   res.render('users/new');
 });
 
