@@ -1,5 +1,5 @@
 <h1>釣り場一覧だよ</h1>
-<a href=<%= `/fishingspots/new` %> class='button is-danger'>作成</a>
+<a href=<%= `/fishingSpots/new` %> class='button is-danger'>作成</a>
 <table class="table">
   <thead>
     <tr>
@@ -9,15 +9,15 @@
     </tr>
   </thead>
   <tbody>
-    <% fishingspots.forEach(fishingspot => { %>
+    <% fishingSpots.forEach(fishingSpot => { %>
       <tr>
-        <td><%= fishingspot.id %></td>
-        <td><%= fishingspot.name %></td>
+        <td><%= fishingSpot.id %></td>
+        <td><%= fishingSpot.name %></td>
         <td>
-          <a href=<%= `/fishingspots/${fishingspot.id}/edit` %> class='button'>
+          <a href=<%= `/fishingSpots/${fishingSpot.id}/edit` %> class='button'>
             編集
           </a>
-          <form action=<%= `/fishingspots/${fishingspot.id}?_method=DELETE` %> method="post">
+          <form action=<%= `/fishingSpots/${fishingSpot.id}?_method=DELETE` %> method="post">
             <button type="submit" class="button">削除</button>
           </form>
         </td>
