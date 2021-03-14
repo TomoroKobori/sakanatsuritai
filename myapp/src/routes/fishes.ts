@@ -1,11 +1,14 @@
 // const express = require('express');
 import express from "express";
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 const router = express.Router();
 
 // index
-router.get('/', function (req, res, next) {
+router.get('/', async (req, res, next) => {
+  const fishes = await prisma.fish.findMany();
   res.render('fishes/index', {
-    fishes: []
+    fishes: fishes
   });
 });
 
@@ -15,40 +18,49 @@ router.get('/new', function(req, res, next) {
 });
 
 // create
-router.post('/', function (req, res, next) {
+router.post('/', async (req, res, next) => {
+  const { name } = req.body
+  await prisma.fish.create({
+    data: {
+      name
+    },
+  })
   res.redirect('/fishes');
 });
 
 // edit
-// router.get('/:id/edit', function (req, res, next) {
-//   models.Fish.findByPk(req.params.id, {
-//   }).then(fish => {
-//     res.render('fishes/edit', {
-//       fish: fish
-//     });
-//   });
-// });
+router.get('/:id/edit', async (req, res, next) => {
+  const { id } = req.params
+  const fish = await prisma.fish.findUnique({
+    where: {
+      id: Number(id),
+    },
+  });
+  res.render('fishes/edit', {
+      fish: fish
+  });
+});
 
 // update
-// router.put('/:id', function (req, res, next) {
-//   models.Fish.findByPk(req.params.id, {
-//   }).then(fish => {
-//     fish.update({
-//       name: req.body.name
-//     })
-//   }).then(fish => {
-//     res.redirect('/fishes');
-//   });
-// });
+router.put('/:id', async (req, res, next) => {
+  const { id } = req.params
+  const { name } = req.body
+  await prisma.fish.update({
+    where: { id: Number(id) },
+    data: { name: name }
+  });
+  res.redirect('/fishes');
+});
 
 // destroy
-// router.delete('/:id', function (req, res, next) {
-//   models.Fish.findByPk(req.params.id, {
-//   }).then(fish => {
-//     fish.destroy();
-//   }).then(fish => {
-//     res.redirect('/fishes');
-//   });
-// });
+router.delete('/:id', async (req, res, next) => {
+  const { id } = req.params
+  await prisma.fish.delete({
+    where: {
+      id: Number(id),
+    },
+  });
+  res.redirect('/fishes');
+});
 
 module.exports = router;

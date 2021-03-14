@@ -45,7 +45,7 @@ router.get('/:id/edit', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   const { id } = req.params
   const { name } = req.body
-  const post = await prisma.fishingSpot.update({
+  await prisma.fishingSpot.update({
     where: { id: Number(id) },
     data: { name: name }
   });
