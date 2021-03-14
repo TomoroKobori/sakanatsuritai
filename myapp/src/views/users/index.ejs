@@ -1,0 +1,29 @@
+<h1>ユーザの一覧だよ</h1>
+<a href=<%= `/users/new` %> class='button is-danger'>作成</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>名前</th>
+      <th>メールアドレス</th>
+      <th>アクション</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(user => { %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= `${user.last_name}${user.first_name}` %></td>
+        <td><%= user.email %></td>
+        <td>
+          <a href=<%= `/users/${user.id}/edit` %> class='button'>
+            編集
+          </a>
+          <form action=<%= `/users/${user.id}?_method=DELETE` %> method="post">
+            <button type="submit" class="button">削除</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

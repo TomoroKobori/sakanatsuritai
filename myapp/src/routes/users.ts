@@ -6,61 +6,68 @@ const router = express.Router();
 
 // index
 router.get('/', async (req, res, next) => {
-  const fishes = await prisma.fish.findMany();
-  res.render('fishes/index', {
-    fishes: fishes
+  const users = await prisma.user.findMany();
+  res.render('users/index', {
+    users: users
   });
 });
 
 // new
 router.get('/new', (req, res, next) => {
-  res.render('fishes/new');
+  console.log('いいいいいい')
+  res.render('users/new');
 });
 
 // create
 router.post('/', async (req, res, next) => {
-  const { name } = req.body
-  await prisma.fish.create({
+  const { email, first_name, last_name } = req.body
+  await prisma.user.create({
     data: {
-      name
+      email,
+      first_name,
+      last_name
     },
   })
-  res.redirect('/fishes');
+  res.redirect('/users');
 });
 
 // edit
 router.get('/:id/edit', async (req, res, next) => {
   const { id } = req.params
-  const fish = await prisma.fish.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       id: Number(id),
     },
   });
-  res.render('fishes/edit', {
-      fish: fish
+  res.render('users/edit', {
+      user: user
   });
 });
 
 // update
 router.put('/:id', async (req, res, next) => {
   const { id } = req.params
-  const { name } = req.body
-  await prisma.fish.update({
+  const { email, first_name, last_name } = req.body
+  await prisma.user.update({
     where: { id: Number(id) },
-    data: { name: name }
+    data: {
+      email: email,
+      first_name: first_name,
+      last_name: last_name
+     }
   });
-  res.redirect('/fishes');
+  res.redirect('/users');
 });
 
 // destroy
 router.delete('/:id', async (req, res, next) => {
   const { id } = req.params
-  await prisma.fish.delete({
+  await prisma.user.delete({
     where: {
       id: Number(id),
     },
   });
-  res.redirect('/fishes');
+  res.redirect('/users');
 });
 
 module.exports = router;

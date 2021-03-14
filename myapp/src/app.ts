@@ -11,6 +11,7 @@ const methodOverride = require("method-override");
 const indexRouter = require('./routes/index');
 const fishingSpotsRouter = require('./routes/fishingSpots')
 const fishesRouter = require('./routes/fishes')
+const userRouter = require('./routes/users')
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/fishingSpots', fishingSpotsRouter);
 app.use('/fishes', fishesRouter);
+app.use('/users', userRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next): void => {
@@ -51,7 +53,7 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 
   // render the error page
   res.status(500);
-  res.render('views/error');
+  res.render('error');
 });
 
 module.exports = app;
