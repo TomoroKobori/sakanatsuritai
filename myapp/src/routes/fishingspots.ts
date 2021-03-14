@@ -1,11 +1,12 @@
 // const express = require('express');
 import express from "express";
+import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 const router = express.Router();
 
 // index
-router.get('/', async (req, res, next) => {
+router.get('/', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const fishingSpots = await prisma.fishingSpot.findMany();
   res.render('fishingSpots/index', {
     fishingSpots: fishingSpots
@@ -13,12 +14,12 @@ router.get('/', async (req, res, next) => {
 });
 
 // new
-router.get('/new', (req, res, next) => {
+router.get('/new', (req: Request, res: Response, next: NextFunction): void => {
   res.render('fishingSpots/new');
 });
 
 // create
-router.post('/', async (req, res, next) => {
+router.post('/', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { name } = req.body
   await prisma.fishingSpot.create({
     data: {
@@ -29,7 +30,7 @@ router.post('/', async (req, res, next) => {
 });
 
 // edit
-router.get('/:id/edit', async (req, res, next) => {
+router.get('/:id/edit', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { id } = req.params
   const fishingSpot = await prisma.fishingSpot.findUnique({
     where: {
@@ -42,7 +43,7 @@ router.get('/:id/edit', async (req, res, next) => {
 });
 
 // // update
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { id } = req.params
   const { name } = req.body
   await prisma.fishingSpot.update({
@@ -53,7 +54,7 @@ router.put('/:id', async (req, res, next) => {
 });
 
 // destroy
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { id } = req.params
   await prisma.fishingSpot.delete({
     where: {
