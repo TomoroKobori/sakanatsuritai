@@ -17,12 +17,15 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.1",
     "http-errors": "~1.6.3",
     "method-override": "^3.0.0",
     "morgan": "~1.9.1",
     "mysql2": "^2.2.5",
     "node-sass-middleware": "^0.11.0",
     "nodemon": "^2.0.7",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "prisma": "^2.18.0"
   },
   "devDependencies": {

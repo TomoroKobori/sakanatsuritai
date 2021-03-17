@@ -4,16 +4,22 @@
       <img src="/images/sakanatsuritai_logo.png" width="128" height="128"/>
     </a>
   </div>
-  <div class="navbar-end">
-    <div class="navbar-item">
-      <a href="#" class='button is-success'>
-        ログイン
-      </a>
+  <% if (user) { %>
+    <a href="/logout" class='button is-danger'>
+      ログアウト
+    </a>
+  <% } else { %>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a href="/login" class='button is-success'>
+          ログイン
+        </a>
+      </div>
+      <div class="navbar-item">
+        <a href="#" class='button is-danger'>
+          新規会員登録
+        </a>
+      </div>
     </div>
-    <div class="navbar-item">
-      <a href="#" class='button is-danger'>
-        新規会員登録
-      </a>
-    </div>
-  </div>
+  <% } %>
 </nav>
