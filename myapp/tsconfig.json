@@ -1,30 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es2020",
     "module": "commonjs",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
-    "sourceMap": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "moduleResolution": "node",
-    "baseUrl": "src",
     "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "allowSyntheticDefaultImports": true,
+    "target": "es2020",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "node_modules/*",
+        "src/types/*"
+      ]
+    }
   },
   "include": [
-    "src/**/*",
-    "src/migrations"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ],
-  "compileOnSave": false
+    "src/**/*"
+  ]
 }

@@ -2,5 +2,5 @@
   "watch": ["src"],
   "ext": "ts",
   "ignore": ["tests/**/*.ts"],
-  "exec": "npm run ts-node ./src/server"
+  "exec": "npm run build && npm run ts-node ./src/server"
 }
