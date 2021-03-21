@@ -1,3 +1,4 @@
 .env
 myapp/node_modules/
 myapp/dist/
+myapp/debug.log
