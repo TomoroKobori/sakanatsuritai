@@ -56,8 +56,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// _dirnameだと/src/srcが取れてしまうので一旦ベタ書きにした
 app.use(
-  express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
+  express.static("/src/dist/public", { maxAge: 31557600000 })
 );
 
 // routes
