@@ -1,25 +1,19 @@
-// const express = require('express');
-import express from "express";
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
-const router = express.Router();
 
-// index
-router.get('/', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const index = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const fishingSpots = await prisma.fishingSpot.findMany();
   res.render('fishingSpots/index', {
     fishingSpots: fishingSpots
   });
-});
+};
 
-// new
-router.get('/new', (req: Request, res: Response, next: NextFunction): void => {
+export const newFishingSpot = (req: Request, res: Response, next: NextFunction): void => {
   res.render('fishingSpots/new');
-});
+};
 
-// create
-router.post('/', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const createFishingSpot = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { name } = req.body
   await prisma.fishingSpot.create({
     data: {
@@ -27,10 +21,9 @@ router.post('/', async (req: Request, res: Response, next: NextFunction): Promis
     },
   })
   res.redirect('/fishingSpots');
-});
+};
 
-// edit
-router.get('/:id/edit', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const editFishingSpot = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { id } = req.params
   const fishingSpot = await prisma.fishingSpot.findUnique({
     where: {
@@ -40,10 +33,9 @@ router.get('/:id/edit', async (req: Request, res: Response, next: NextFunction):
   res.render('fishingSpots/edit', {
     fishingSpot: fishingSpot
   });
-});
+};
 
-// // update
-router.put('/:id', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const updateFishingSpot = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { id } = req.params
   const { name } = req.body
   await prisma.fishingSpot.update({
@@ -51,10 +43,9 @@ router.put('/:id', async (req: Request, res: Response, next: NextFunction): Prom
     data: { name: name }
   });
   res.redirect('/fishingSpots');
-});
+};
 
-// destroy
-router.delete('/:id', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const destroyFishingSpot = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { id } = req.params
   await prisma.fishingSpot.delete({
     where: {
@@ -62,6 +53,4 @@ router.delete('/:id', async (req: Request, res: Response, next: NextFunction): P
     },
   });
   res.redirect('/fishingSpots');
-});
-
-module.exports = router;
+};

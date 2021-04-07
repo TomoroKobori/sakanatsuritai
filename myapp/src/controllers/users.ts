@@ -1,25 +1,19 @@
-// const express = require('express');
-import express from "express";
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
-const router = express.Router();
 
-// index
-router.get('/', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const index = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const users = await prisma.user.findMany();
   res.render('users/index', {
     users: users
   });
-});
+};
 
-// new
-router.get('/new', (req: Request, res: Response, next: NextFunction): void => {
+export const newUser = (req: Request, res: Response, next: NextFunction): void => {
   res.render('users/new');
-});
+};
 
-// create
-router.post('/', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { email, first_name, last_name } = req.body
   await prisma.user.create({
     data: {
@@ -29,10 +23,9 @@ router.post('/', async (req: Request, res: Response, next: NextFunction): Promis
     },
   })
   res.redirect('/users');
-});
+};
 
-// edit
-router.get('/:id/edit', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const editUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { id } = req.params
   const user = await prisma.user.findUnique({
     where: {
@@ -42,10 +35,9 @@ router.get('/:id/edit', async (req: Request, res: Response, next: NextFunction):
   res.render('users/edit', {
       user: user
   });
-});
+};
 
-// update
-router.put('/:id', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const updateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { id } = req.params
   const { email, first_name, last_name } = req.body
   await prisma.user.update({
@@ -57,10 +49,9 @@ router.put('/:id', async (req: Request, res: Response, next: NextFunction): Prom
      }
   });
   res.redirect('/users');
-});
+};
 
-// destroy
-router.delete('/:id', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const destroyUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { id } = req.params
   await prisma.user.delete({
     where: {
@@ -68,6 +59,4 @@ router.delete('/:id', async (req: Request, res: Response, next: NextFunction): P
     },
   });
   res.redirect('/users');
-});
-
-module.exports = router;
+};

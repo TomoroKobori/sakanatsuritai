@@ -9,16 +9,13 @@ import path from "path";
 import passport from "passport";
 import expressLayouts from "express-ejs-layouts";
 import methodOverride from "method-override";
+import logger from "morgan";
 import { SESSION_SECRET } from "./util/secrets";
 
-console.log(SESSION_SECRET)
-
-// Controllers (route handlers)
 import * as homeController from "./controllers/home";
-// const indexRouter = require('./routes/index');
-const fishingSpotsRouter = require('./routes/fishingSpots')
-const fishesRouter = require('./routes/fishes')
-const userRouter = require('./routes/users')
+import * as fishesController from "./controllers/fishes";
+import * as fishingSpotsController from "./controllers/fishingSpots";
+import * as usersController from "./controllers/users";
 
 import * as passportConfig from "./config/passport";
 
@@ -30,6 +27,7 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.use(methodOverride("_method"));
 app.use(compression());
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
@@ -63,9 +61,24 @@ app.use(
 
 // routes
 app.get("/", homeController.index);
-// app.use('/', indexRouter);
-app.use('/fishingSpots', fishingSpotsRouter);
-app.use('/fishes', fishesRouter);
-app.use('/users', userRouter);
+app.get("/fishes", fishesController.index);
+app.get("/fishes/new", fishesController.newFish);
+app.post("/fishes", fishesController.createFish);
+app.get("/fishes/:id/edit", fishesController.editFish);
+app.put("/fishes/:id", fishesController.updateFish);
+app.delete("/fishes/:id", fishesController.destroyFish);
+app.get("/fishingSpots", fishingSpotsController.index);
+app.get("/fishingSpots/new", fishingSpotsController.newFishingSpot);
+app.post("/fishingSpots", fishingSpotsController.createFishingSpot);
+app.get("/fishingSpots/:id/edit", fishingSpotsController.editFishingSpot);
+app.put("/fishingSpots/:id", fishingSpotsController.updateFishingSpot);
+app.delete("/fishingSpots/:id", fishingSpotsController.destroyFishingSpot);
+app.get("/users", usersController.index);
+app.get("/users/new", usersController.newUser);
+app.post("/users", usersController.createUser);
+app.get("/users/:id/edit", usersController.editUser);
+app.put("/users/:id", usersController.updateUser);
+app.delete("/users/:id", usersController.destroyUser);
+
 
 export default app;
