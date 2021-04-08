@@ -5,9 +5,9 @@
     </a>
   </div>
   <% if (user) { %>
-    <a href="/logout" class='button is-danger'>
-      ログアウト
-    </a>
+    <form action="/logout" method="post">
+      <button type="submit" class="button is-danger">ログアウト</button>
+    </form>
   <% } else { %>
     <div class="navbar-end">
       <div class="navbar-item">
