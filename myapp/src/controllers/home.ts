@@ -13,11 +13,13 @@ export const newLogin = (req: Request, res: Response) => {
 };
 
 export const createLogin = (req: Request, res: Response) => {
-  console.log('せいこう！！')
   res.redirect('/');
 };
 
 export const logout = (req: Request, res: Response) => {
   req.logout();
+  req.session.destroy(() => {
+    console.log('セッションリセット')
+  });
   res.redirect('/');
 }

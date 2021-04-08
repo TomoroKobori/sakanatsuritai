@@ -31,9 +31,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: SESSION_SECRET!
+  secret: SESSION_SECRET
 }));
 app.use(flash());
 app.use(lusca.xframe("SAMEORIGIN"));
