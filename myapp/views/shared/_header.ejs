@@ -5,9 +5,13 @@
     </a>
   </div>
   <% if (user) { %>
-    <form action="/logout" method="post">
-      <button type="submit" class="button is-danger">ログアウト</button>
-    </form>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <form action="/logout" method="post">
+          <button type="submit" class="button is-danger">ログアウト</button>
+        </form>
+      </div>
+    </div>
   <% } else { %>
     <div class="navbar-end">
       <div class="navbar-item">
