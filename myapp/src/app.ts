@@ -30,9 +30,15 @@ app.use(compression());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// secure属性は環境変数で切り替えたい
 app.use(session({
-  secret: SESSION_SECRET
+  secret: SESSION_SECRET,
+  cookie: {
+    sameSite: true,
+    secure: process.env.COOKIE_SECURE === 'true'
+  }
 }));
+
 app.use(flash());
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
