@@ -18,6 +18,7 @@ model User {
   last_name  String       @db.VarChar(255)
   first_name String       @db.VarChar(255)
   email      String       @unique @db.VarChar(255)
+  password   String       @db.VarChar(255)
   FishingLog FishingLog[]
 }
 
