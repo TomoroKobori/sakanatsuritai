@@ -69,7 +69,7 @@ app.post("/fishingSpots", fishingSpotsController.createFishingSpot);
 app.get("/fishingSpots/:id/edit", fishingSpotsController.editFishingSpot);
 app.put("/fishingSpots/:id", fishingSpotsController.updateFishingSpot);
 app.delete("/fishingSpots/:id", fishingSpotsController.destroyFishingSpot);
-app.get("/users", usersController.index);
+app.get("/users", passportConfig.isAuthenticated, usersController.index);
 app.get("/users/new", usersController.newUser);
 app.post("/users", usersController.createUser);
 app.get("/users/:id/edit", usersController.editUser);
