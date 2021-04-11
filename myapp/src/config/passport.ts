@@ -13,8 +13,6 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-console.log('読み込んだ')
-
 passport.use(new LocalStrategy({ usernameField: "email" },
   (username: string, password: string, done: any) => {
     if (username !== 'kobori') {
