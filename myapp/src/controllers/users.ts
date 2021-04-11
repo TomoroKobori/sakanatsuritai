@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from '@prisma/client';
+const bcrypt = require('bcrypt-nodejs');
 const prisma = new PrismaClient();
 
 export const index = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -15,11 +16,13 @@ export const newUser = (req: Request, res: Response, next: NextFunction): void =
 
 export const createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const { email, first_name, last_name } = req.body
+  const password = bcrypt.hashSync(req.body.password)
   await prisma.user.create({
     data: {
       email,
       first_name,
-      last_name
+      last_name,
+      password
     },
   })
   res.redirect('/users');
