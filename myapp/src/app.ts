@@ -1,5 +1,5 @@
 
-import express from "express";
+import express, { NextFunction } from "express";
 
 import compression from "compression";  // compresses requests
 import session from "express-session";
@@ -10,14 +10,14 @@ import expressLayouts from "express-ejs-layouts";
 import methodOverride from "method-override";
 import logger from "morgan";
 import { SESSION_SECRET } from "./util/secrets";
-
 import passport from "passport";
-const LocalStrategy = require('passport-local').Strategy;
 
 import * as homeController from "./controllers/home";
 import * as fishesController from "./controllers/fishes";
 import * as fishingSpotsController from "./controllers/fishingSpots";
 import * as usersController from "./controllers/users";
+
+import * as passportConfig from "./config/passport";
 
 const app = express();
 
@@ -38,38 +38,13 @@ app.use(session({
     secure: process.env.COOKIE_SECURE === 'true'
   }
 }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 // _dirnameだと/src/srcが取れてしまうので一旦ベタ書きにした
 app.use(express.static("/src/dist/public", { maxAge: 31557600000 }));
-
-// passport
-app.use(passport.initialize());
-app.use(passport.session());
-// 認証後に暗号化
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-// 受け取ったセッションキーを復号
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
-passport.use(new LocalStrategy({ usernameField: "email" },
-  (username: string, password: string, done: any) => {
-    if (username !== 'kobori') {
-      // error
-      return done(null, false);
-    } else if (password !== 'tomoro') {
-      // error
-      return done(null, false);
-    } else {
-      //success
-      return done(null, { username: username, password: password});
-    }
-  }
-));
 
 // ログインユーザを取得
 app.use((req, res, next) => {
