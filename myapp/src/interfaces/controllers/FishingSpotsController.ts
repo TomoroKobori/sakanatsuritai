@@ -11,36 +11,36 @@ export class FishingSpotsController {
   private fishingSpotRepository: FishingSpotRepository
 
   constructor(prisma: PrismaClient) {
-    this.fishingSpotRepository = new FishRepository(prisma)
+    this.fishingSpotRepository = new FishingSpotRepository(prisma)
   }
 
-  async findFish(req: Request, res: Response) {
+  async findFishingSpot(req: Request, res: Response) {
     const id = req.params.id
-    const useCase = new GetFish(this.fishingSpotRepository)
+    const useCase = new GetFishingSpot(this.fishingSpotRepository)
     return await useCase.execute(Number(id))
   }
 
-  async findAllFishes(req: Request, res: Response) {
-    const useCase = new ListFishes(this.fishingSpotRepository)
+  async findAllFishingSpotes(req: Request, res: Response) {
+    const useCase = new ListFishingSpots(this.fishingSpotRepository)
     return await useCase.execute()
   }
 
-  async createFish(req: Request, res: Response) {
+  async createFishingSpot(req: Request, res: Response) {
     const { name } = req.body
-    const useCase = new CreateFish(this.fishingSpotRepository)
+    const useCase = new CreateFishingSpot(this.fishingSpotRepository)
     return await useCase.execute(name)
   }
 
-  async updateFish(req: Request, res: Response) {
+  async updateFishingSpot(req: Request, res: Response) {
     const id = req.params.id
     const { name } = req.body
-    const useCase = new UpdateFish(this.fishingSpotRepository)
+    const useCase = new UpdateFishingSpot(this.fishingSpotRepository)
     return await useCase.execute(Number(id), name)
   }
 
-  async deleteFish(req: Request, res: Response) {
+  async deleteFishingSpot(req: Request, res: Response) {
     const id = req.params.id
-    const useCase = new DeleteFish(this.fishingSpotRepository)
+    const useCase = new DeleteFishingSpot(this.fishingSpotRepository)
     return await useCase.execute(Number(id))
   }
 }

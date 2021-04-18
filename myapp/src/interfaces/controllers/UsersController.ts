@@ -1,65 +1,46 @@
 import { Request, Response, NextFunction } from "express";
+import { UserRepository } from '../database/UserRepository'
+import { ListUsers } from '../../application/usecases/users/ListUsers'
+import { GetUser } from '../../application/usecases/users/getUser'
+import { CreateUser } from '../../application/usecases/users/CreateUser'
+import { UpdateUser } from '../../application/usecases/users/UpdateUser'
+import { DeleteUser } from '../../application/usecases/users/DeleteUser'
 import { PrismaClient } from '@prisma/client';
-const bcrypt = require('bcrypt-nodejs');
-const prisma = new PrismaClient();
 
-export const index = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const users = await prisma.user.findMany();
-  res.render('users/index', {
-    users: users
-  });
-};
+export class UsersController {
+  private userRepository: UserRepository
 
-export const newUser = (req: Request, res: Response, next: NextFunction): void => {
-  res.render('users/new');
-};
+  constructor(prisma: PrismaClient) {
+    this.userRepository = new UserRepository(prisma)
+  }
 
-export const createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const { email, first_name, last_name } = req.body
-  const password = bcrypt.hashSync(req.body.password)
-  await prisma.user.create({
-    data: {
-      email,
-      first_name,
-      last_name,
-      password
-    },
-  })
-  res.redirect('/users');
-};
+  async findUser(req: Request, res: Response) {
+    const id = req.params.id
+    const useCase = new GetUser(this.userRepository)
+    return await useCase.execute(Number(id))
+  }
 
-export const editUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const { id } = req.params
-  const user = await prisma.user.findUnique({
-    where: {
-      id: Number(id),
-    },
-  });
-  res.render('users/edit', {
-      user: user
-  });
-};
+  async findAllUseres(req: Request, res: Response) {
+    const useCase = new ListUsers(this.userRepository)
+    return await useCase.execute()
+  }
 
-export const updateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const { id } = req.params
-  const { email, first_name, last_name } = req.body
-  await prisma.user.update({
-    where: { id: Number(id) },
-    data: {
-      email: email,
-      first_name: first_name,
-      last_name: last_name
-     }
-  });
-  res.redirect('/users');
-};
+  async createUser(req: Request, res: Response) {
+    const { last_name, first_name, email, password } = req.body
+    const useCase = new CreateUser(this.userRepository)
+    return await useCase.execute(last_name, first_name, email, password)
+  }
 
-export const destroyUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const { id } = req.params
-  await prisma.user.delete({
-    where: {
-      id: Number(id),
-    },
-  });
-  res.redirect('/users');
-};
+  async updateUser(req: Request, res: Response) {
+    const id = req.params.id
+    const { last_name, first_name, email } = req.body
+    const useCase = new UpdateUser(this.userRepository)
+    return await useCase.execute(Number(id), last_name, first_name, email)
+  }
+
+  async deleteUser(req: Request, res: Response) {
+    const id = req.params.id
+    const useCase = new DeleteUser(this.userRepository)
+    return await useCase.execute(Number(id))
+  }
+}
