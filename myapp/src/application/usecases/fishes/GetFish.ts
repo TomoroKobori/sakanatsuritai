@@ -1,13 +1,13 @@
 import { IFishRepository } from '../../repositories/IFishRepository'
 
 export class GetFish {
-  private taskRepository: IFishRepository
+  private fishRepository: IFishRepository
 
-  constructor(taskRepository: IFishRepository) {
-    this.taskRepository = taskRepository
+  constructor(fishRepository: IFishRepository) {
+    this.fishRepository = fishRepository
   }
 
   execute(id: number) {
-    return this.taskRepository.find(id)
+    return this.fishRepository.find(id)
   }
 }
