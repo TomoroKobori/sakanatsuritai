@@ -19,7 +19,7 @@ import usersRouter from './routers/users';
 const app = express();
 
 app.set("port", process.env.PORT || 3000);
-app.set("views", path.join(__dirname, "../views"));
+app.set("views", path.join(__dirname, "../../views"));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.use(methodOverride("_method"));
@@ -50,9 +50,9 @@ app.use((req, res, next) => {
 });
 
 // routes
+app.use('/', homeRouter)
 app.use('/fishes', fishesRouter)
 app.use('/fishingSpots', fishingSpotsRouter)
-app.use('/home', homeRouter)
 app.use('/users', usersRouter)
 
 export default app;

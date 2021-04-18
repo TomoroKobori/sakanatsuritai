@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { FishRepository } from '../database/FishRepository'
 import { ListFishes } from '../../application/usecases/fishes/ListFishes'
-import { GetFish } from '../../application/usecases/fishes/getFish'
+import { GetFish } from '../../application/usecases/fishes/GetFish'
 import { CreateFish } from '../../application/usecases/fishes/CreateFish'
 import { UpdateFish } from '../../application/usecases/fishes/UpdateFish'
 import { DeleteFish } from '../../application/usecases/fishes/DeleteFish'

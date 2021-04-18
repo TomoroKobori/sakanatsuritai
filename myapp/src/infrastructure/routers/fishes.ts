@@ -23,19 +23,19 @@ router.post('/', async (req: Request, res: Response) => {
   res.redirect('/fishes');
 })
 
-router.get("/fishes/:id/edit", async (req: Request, res: Response) => {
+router.get("/:id/edit", async (req: Request, res: Response) => {
   const fish = await fishesController.findFish(req, res)
   res.render('fishes/edit', {
     fish: fish
   });
 })
 
-router.put("/fishes/:id", async (req: Request, res: Response) => {
+router.put("/:id", async (req: Request, res: Response) => {
   await fishesController.updateFish(req, res)
   res.redirect('/fishes');
 })
 
-router.delete("/fishes/:id", async (req: Request, res: Response) => {
+router.delete("/:id", async (req: Request, res: Response) => {
   await fishesController.deleteFish(req, res)
   res.redirect('/fishes');
 })

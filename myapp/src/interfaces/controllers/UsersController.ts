@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { UserRepository } from '../database/UserRepository'
 import { ListUsers } from '../../application/usecases/users/ListUsers'
-import { GetUser } from '../../application/usecases/users/getUser'
+import { GetUser } from '../../application/usecases/users/GetUser'
 import { CreateUser } from '../../application/usecases/users/CreateUser'
 import { UpdateUser } from '../../application/usecases/users/UpdateUser'
 import { DeleteUser } from '../../application/usecases/users/DeleteUser'
@@ -20,7 +20,7 @@ export class UsersController {
     return await useCase.execute(Number(id))
   }
 
-  async findAllUseres(req: Request, res: Response) {
+  async findAllUsers(req: Request, res: Response) {
     const useCase = new ListUsers(this.userRepository)
     return await useCase.execute()
   }

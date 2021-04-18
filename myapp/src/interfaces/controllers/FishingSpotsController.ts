@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { FishingSpotRepository } from '../database/FishingSpotRepository'
 import { ListFishingSpots } from '../../application/usecases/fishingSpots/ListFishingSpots'
-import { GetFishingSpot } from '../../application/usecases/fishingSpots/getFishingSpot'
+import { GetFishingSpot } from '../../application/usecases/fishingSpots/GetFishingSpot'
 import { CreateFishingSpot } from '../../application/usecases/fishingSpots/CreateFishingSpot'
 import { UpdateFishingSpot } from '../../application/usecases/fishingSpots/UpdateFishingSpot'
 import { DeleteFishingSpot } from '../../application/usecases/fishingSpots/DeleteFishingSpot'
@@ -20,7 +20,7 @@ export class FishingSpotsController {
     return await useCase.execute(Number(id))
   }
 
-  async findAllFishingSpotes(req: Request, res: Response) {
+  async findAllFishingSpots(req: Request, res: Response) {
     const useCase = new ListFishingSpots(this.fishingSpotRepository)
     return await useCase.execute()
   }
