@@ -11,10 +11,8 @@ export class FishRepository extends IFishRepository {
   }
 
   private convertModel(r: any) {
-    const fish = new Fish()
-
+    const fish = new Fish(r.name)
     fish.id = r.id
-    fish.name = r.name
 
     return fish
   }
