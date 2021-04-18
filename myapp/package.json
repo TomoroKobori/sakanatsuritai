@@ -7,7 +7,7 @@
     "build": "npm run build-sass && npm run copy-static-assets",
     "copy-static-assets": "npx ts-node copyStaticAssets.ts",
     "dev": "npx nodemon -L",
-    "start": "node dist/server.js",
+    "start": "node dist/infrastructure/server.js",
     "ts-node": "npx ts-node --files"
   },
   "dependencies": {
