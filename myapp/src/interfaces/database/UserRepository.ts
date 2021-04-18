@@ -44,7 +44,6 @@ export class UserRepository extends IUserRepository {
         password: user.password
       },
     })
-    // user.id = result.insertId
     return user
   }
 
@@ -66,6 +65,6 @@ export class UserRepository extends IUserRepository {
         id: user.id,
       },
     });
-    return this.convertModel(user)
+    return user
   }
 }

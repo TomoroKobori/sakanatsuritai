@@ -41,7 +41,6 @@ export class FishRepository extends IFishRepository {
         name: fish.name
       },
     })
-    // fish.id = result.insertId
     return fish
   }
 
@@ -59,6 +58,6 @@ export class FishRepository extends IFishRepository {
         id: fish.id,
       },
     });
-    return this.convertModel(fish)
+    return fish
   }
 }

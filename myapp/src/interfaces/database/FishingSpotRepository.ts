@@ -41,7 +41,6 @@ export class FishingSpotRepository extends IFishingSpotRepository {
         name: fishingSpot.name
       },
     })
-    // fishingSpot.id = result.insertId
     return fishingSpot
   }
 
@@ -59,6 +58,6 @@ export class FishingSpotRepository extends IFishingSpotRepository {
         id: fishingSpot.id,
       },
     });
-    return this.convertModel(fishingSpot)
+    return fishingSpot
   }
 }
