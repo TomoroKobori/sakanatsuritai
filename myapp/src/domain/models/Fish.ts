@@ -1,4 +1,4 @@
-export class FishingSpot {
+export class Fish {
   private _id: number
   private _name: string
 
