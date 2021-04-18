@@ -8,7 +8,7 @@ import path from "path";
 import expressLayouts from "express-ejs-layouts";
 import methodOverride from "method-override";
 import logger from "morgan";
-import { SESSION_SECRET } from "../util/secrets";
+import { SESSION_SECRET } from "./util/secrets";
 import passport from "passport";
 
 import fishesRouter from './routers/fishes';

@@ -1,6 +1,6 @@
 import express = require('express');
 import { Request, Response } from "express";
-import * as passportConfig from "../../config/passport";
+import * as passportConfig from "../config/passport";
 
 const router = express.Router();
 
